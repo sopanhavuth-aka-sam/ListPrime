@@ -3,44 +3,55 @@ import java.util.*;
 public class main {
 
 	/**
-	 * @param args
+	 * Purpose: ask user for input(int). Program list all prime numbers that <=input.
+	 * 			This program use the concept of "sieve of eratosthenes"
+	 * Author: Sopanhavuth Som
 	 */
 	public static void main(String[] args) {
 
-	    int prime = 0;
         Scanner input = new Scanner(System.in);
 	    
-        System.out.println("List all prime numbers under: ");
-        // find prime under this max
+        //Request and record user's input(int)
+        System.out.print("List all prime numbers under: ");
         int max = input.nextInt();
-        // change max so array has 0-max slots
-        max =max+1;
-        // Array populating///////////////////
-        int numPool[] = new int[max];
-        for(int i=0; i<=max-1; i++){
+        //END
+        
+        
+        //Create and fill array the size of max
+        int numPool[] = new int[max+1];
+        for(int i=0; i<=max; i++){
             numPool[i] = i;
         }
-        //////////////////////////////////////
-         
-        for(int i=2; i<max; i++){
-            // Skip/Marking Composite Num found by divided previous found 'prime'
-            if(numPool[i]==0){
-                //do nothing
+        //END
+        
+        
+        
+        for(int i=2; i<=max; i++){
+            
+        	if(numPool[i]==0){
+                //Skip; "0" is used to mark composite number.
             }
-             
+            
+            
             else{
-                prime = numPool[i];
+            	//Print out the current "prime" number
+                int prime = numPool[i];
                 System.out.println(prime);
-                for(int j=i+1; j<=max-1; j++){
+                //END
+                
+                //Change number that divided by "prime" to "0"
+                for(int j=i+1; j<=max; j++){
                     if(numPool[j]==0){
-                        //do nothing
+                    	//Skip; "0" is used to mark composite number.
                     }
-                    else{    
-                        int dividedByPrime = numPool[j]%numPool[i];
-                        if(dividedByPrime == 0){
+                    else{
+                    	//Test if numbers-in-the-pool is divided by the current "prime"
+                        if(numPool[j]%prime == 0){
                             numPool[j]=0;
                         }
+                        //END
                     }
+                //END
                 }
             }
         }
